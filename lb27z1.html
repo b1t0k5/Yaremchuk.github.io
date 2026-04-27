@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Спливаючі підказки</title>
+
+<style>
+body {
+    font-family: Arial;
+    padding: 20px;
+}
+
+/* стиль підказки */
+.tooltip {
+    position: absolute;
+    background: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: none;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+/* текст з підказкою */
+.tip-text {
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Приклад тексту</h2>
+
+<p>
+    Це <span class="tip-text" data-tip="Це приклад підказки">слово</span> має підказку.
+</p>
+
+<hr>
+
+<h3>Додати нову підказку</h3>
+
+<input type="text" id="textValue" placeholder="Текст">
+<input type="text" id="tipValue" placeholder="Підказка">
+<button onclick="addTooltip()">Додати</button>
+
+<p id="container"></p>
+
+<div id="tooltip" class="tooltip"></div>
+
+<script>
+const tooltip = document.getElementById("tooltip");
+
+// показ підказки
+document.addEventListener("mouseover", function(e) {
+    if (e.target.classList.contains("tip-text")) {
+        tooltip.innerHTML = e.target.dataset.tip;
+        tooltip.style.display = "block";
+    }
+});
+
+// рух підказки за мишею
+document.addEventListener("mousemove", function(e) {
+    tooltip.style.left = e.pageX + 10 + "px";
+    tooltip.style.top = e.pageY + 10 + "px";
+});
+
+// приховування
+document.addEventListener("mouseout", function(e) {
+    if (e.target.classList.contains("tip-text")) {
+        tooltip.style.display = "none";
+    }
+});
+
+// додавання нової підказки
+function addTooltip() {
+    const text = document.getElementById("textValue").value;
+    const tip = document.getElementById("tipValue").value;
+
+    if (!text || !tip) {
+        alert("Заповніть обидва поля!");
+        return;
+    }
+
+    const span = document.createElement("span");
+    span.className = "tip-text";
+    span.dataset.tip = tip;
+    span.innerText = text + " ";
+
+    document.getElementById("container").appendChild(span);
+}
+</script>
+
+</body>
+</html>
