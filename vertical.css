@@ -1,0 +1,33 @@
+body {
+    font-family: Arial;
+}
+
+#menu {
+    width: 220px;
+}
+
+#menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#menu li a {
+    display: block;
+    padding: 12px;
+    background: #2c3e50;
+    color: white;
+    text-decoration: none;
+}
+
+#menu li a:hover {
+    background: #1abc9c;
+}
+
+#menu ul ul {
+    display: none;
+}
+
+#menu li.open > ul {
+    display: block;
+}
